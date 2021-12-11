@@ -22,14 +22,11 @@ const Nav = (props) => {
           changeSelectedCategory(event.target.value);
           updatePosts(event.target.value);
         }}
+        defaultValue={selectedCategory}
       >
         {categories.map((category) => {
           return (
-            <option
-              key={category.id}
-              value={category.name}
-              defaultValue={selectedCategory}
-            >
+            <option key={category.id} value={category.name}>
               {category.name}
             </option>
           );
