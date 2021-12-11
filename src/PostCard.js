@@ -1,26 +1,35 @@
 import React from "react";
 import { connect } from "react-redux";
 import { mapStateToProps } from "./Nav";
-import { savePost, unsavePost } from "./store";
+import { savePost, unsavePost, updateUps, INCREMENT, DECREMENT } from "./store";
 
 const PostCard = ({
   post,
   savePost,
   viewSavedPosts,
   unsavePost,
+  updateUps,
   savedPosts,
 }) => {
   return (
     <div className="card">
       <div className="upvote-container">
         <div className="upvotes">
-          <button aria-label="upvote" className="voteButton ">
+          <button
+            aria-label="upvote"
+            className="voteButton"
+            onClick={() => updateUps(post.data.id, INCREMENT)}
+          >
             <span className="">
               <i className="icon icon-upvote"></i>
             </span>
           </button>
           <p> {post.data.ups}</p>
-          <button aria-label="downvote" className="voteButton ">
+          <button
+            aria-label="downvote"
+            className="voteButton "
+            onClick={() => updateUps(post.data.id, DECREMENT)}
+          >
             <span className="">
               <i className="icon icon-downvote"></i>
             </span>
@@ -84,6 +93,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     unsavePost: (id) => {
       dispatch(unsavePost(id));
+    },
+    updateUps: (id, operator) => {
+      dispatch(updateUps(id, operator));
     },
   };
 };

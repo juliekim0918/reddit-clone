@@ -24,6 +24,9 @@ const UPDATE_POSTS = "UPDATE_POSTS";
 const SAVE_POST = "SAVE_POST";
 const UNSAVE_POST = "UNSAVE_POST";
 const TOGGLE_VIEW = "TOGGLE_VIEW";
+const UPDATE_UPS = "UPDATE_UPS";
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT";
 
 export const changeSelectedCategory = (category) => {
   return { type: CHANGE_CATEGORY, category };
@@ -43,6 +46,14 @@ export const unsavePost = (id) => {
 
 export const toggleView = () => {
   return { type: TOGGLE_VIEW };
+};
+
+export const updateUps = (votedPost, operator) => {
+  return {
+    type: UPDATE_UPS,
+    votedPost,
+    operator,
+  };
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +79,15 @@ const reducer = (state = initialState, action) => {
       return { ...state, savedPosts: newSavedPosts };
     case TOGGLE_VIEW:
       return { ...state, viewSavedPosts: !state.viewSavedPosts };
+    case UPDATE_UPS:
+      const { votedPost, operator } = action;
+      const newPosts = state.posts.map((post) => {
+        if (post.data.id === votedPost) {
+          operator === INCREMENT ? post.data.ups++ : post.data.ups--;
+        }
+        return post;
+      });
+      return { ...state, posts: newPosts };
     default:
       return state;
   }
