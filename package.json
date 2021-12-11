@@ -1,0 +1,40 @@
+{
+  "name": "react-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/*spec.js",
+    "test:dev": "npm test -- --watch",
+    "start": "npm run start-server & npm run build-watch",
+    "start-server": "nodemon --watch server -e js,html server",
+    "build-watch": "webpack -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "redux": "^4.1.2",
+    "sequelize": "^6.12.0-beta.1",
+    "volleyball": "^1.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "chai": "^4.3.4",
+    "install": "^0.13.0",
+    "mocha": "^9.1.3",
+    "npm": "^8.2.0",
+    "react-redux": "^7.2.6",
+    "redux-logger": "^3.0.6",
+    "supertest": "^6.1.6",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  }
+}
