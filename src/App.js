@@ -16,16 +16,9 @@ class App extends Component {
   }
 
   render() {
-    const {
-      categories,
-      selectedCategory,
-      posts,
-      changeSelectedCategory,
-      updatePosts,
-    } = this.props;
     return (
       <div>
-        <Nav />
+        <Nav/>
         <div>
           <Body />
         </div>

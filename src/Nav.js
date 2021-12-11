@@ -8,23 +8,33 @@ const Nav = (props) => {
     props;
   return (
     <nav>
-      <h2>Welcome to our Reddit app</h2>
-      <div className="links">
+      <a href="/">
+        <img
+          className="logo"
+          src="https://logodownload.org/wp-content/uploads/2018/02/reddit-logo.png"
+          alt=""
+        />
+      </a>
+
+      <select
+        name="categories-dropdown"
+        onChange={() => {
+          changeSelectedCategory(event.target.value);
+          updatePosts(event.target.value);
+        }}
+      >
         {categories.map((category) => {
           return (
-            <div
-              className={selectedCategory === category.name ? "selected" : ""}
+            <option
               key={category.id}
-              onClick={() => {
-                changeSelectedCategory(category.name);
-                updatePosts(category.name);
-              }}
+              value={category.name}
+              defaultValue={selectedCategory}
             >
               {category.name}
-            </div>
+            </option>
           );
         })}
-      </div>
+      </select>
     </nav>
   );
 };
