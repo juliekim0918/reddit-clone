@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { changeSelectedCategory, updatePosts } from "./store";
+// import { updatePosts } from "./store";
+import { changeSelectedCategory } from "./store/selectedCategory";
+import { updatePosts } from "./store/posts";
 import axios from "axios";
 
 const Nav = (props) => {
@@ -42,12 +44,11 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    changeSelectedCategory: async (category) => {
+    changeSelectedCategory: (category) => {
       dispatch(changeSelectedCategory(category));
     },
-    updatePosts: async (category) => {
-      const { children } = (await axios.get(`/api/${category}`)).data.data;
-      dispatch(updatePosts(children));
+    updatePosts: (category) => {
+      dispatch(updatePosts(category));
     },
   };
 };

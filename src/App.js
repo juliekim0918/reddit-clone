@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import store, { changeSelectedCategory, updatePosts } from "./store";
 import { connect } from "react-redux";
-import axios from "axios";
 import Nav, { mapStateToProps, mapDispatchToProps } from "./Nav";
 import Body from "./Body";
 
@@ -18,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav/>
+        <Nav />
         <div>
           <Body />
         </div>

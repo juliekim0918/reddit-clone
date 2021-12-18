@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { mapStateToProps } from "./Nav";
-import { savePost, unsavePost, updateUps, INCREMENT, DECREMENT } from "./store";
+import { INCREMENT, DECREMENT, updateUps } from "./store/posts";
+import { savePost, unsavePost } from "./store/savedPosts";
 
 const PostCard = ({
+  selectedCategory,
   post,
   savePost,
   viewSavedPosts,
@@ -60,7 +62,7 @@ const PostCard = ({
           {!savedPosts.find(
             (savedPost) => savedPost.data.id === post.data.id
           ) ? (
-            <button onClick={() => savePost(post.data.id)}>
+            <button onClick={() => savePost(post.data.id, selectedCategory)}>
               <span>
                 <i className="icon icon-save"></i>
               </span>
@@ -88,8 +90,8 @@ const PostCard = ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    savePost: (id) => {
-      dispatch(savePost(id));
+    savePost: (id, selectedCategory) => {
+      dispatch(savePost(id, selectedCategory));
     },
     unsavePost: (id) => {
       dispatch(unsavePost(id));

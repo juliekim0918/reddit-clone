@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { mapStateToProps } from "./Nav";
 import PostCard from "./PostCard";
-import { toggleView } from "./store";
+import { toggleView } from "./store/viewSavedPosts";
 
 const Body = ({
   selectedCategory,
