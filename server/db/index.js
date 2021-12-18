@@ -5,7 +5,7 @@ const db = new Sequelize(
 );
 const { STRING, INTEGER } = Sequelize;
 
-const Post = db.define("post", {
+const Saved_Post = db.define("saved_post", {
   id: {
     type: STRING,
     allowNull: false,
@@ -23,10 +23,13 @@ const Post = db.define("post", {
     type: STRING,
     allowNull: false,
   },
+  subreddit: {
+    type: STRING,
+  },
   ups: {
     type: INTEGER,
     allowNull: false,
   },
 });
 
-module.exports = { db, Post };
+module.exports = { db, Saved_Post };

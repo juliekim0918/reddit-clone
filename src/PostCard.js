@@ -13,6 +13,7 @@ const PostCard = ({
   updateUps,
   savedPosts,
 }) => {
+  !viewSavedPosts ? (post = post.data) : "";
   return (
     <div className="card">
       <div className="upvote-container">
@@ -20,17 +21,17 @@ const PostCard = ({
           <button
             aria-label="upvote"
             className="voteButton"
-            onClick={() => updateUps(post.data.id, INCREMENT)}
+            onClick={() => updateUps(post.id, INCREMENT)}
           >
             <span className="">
               <i className="icon icon-upvote"></i>
             </span>
           </button>
-          <p> {post.data.ups}</p>
+          <p> {post.ups}</p>
           <button
             aria-label="downvote"
             className="voteButton "
-            onClick={() => updateUps(post.data.id, DECREMENT)}
+            onClick={() => updateUps(post.id, DECREMENT)}
           >
             <span className="">
               <i className="icon icon-downvote"></i>
@@ -41,35 +42,31 @@ const PostCard = ({
       <div className="card-body">
         <img
           className="thumbnail"
-          src={post.data.thumbnail === "self" ? "" : `${post.data.thumbnail}`}
+          src={post.thumbnail === "self" ? "" : `${post.thumbnail}`}
         />
         <a
           className="link"
-          href={"https://www.reddit.com" + `${post.data.permalink}`}
+          href={"https://www.reddit.com" + `${post.permalink}`}
           target="_blank"
         >
-          <h3>{post.data.title}</h3>
+          <h3>{post.title}</h3>
         </a>
         {viewSavedPosts ? (
-          <div className="category-badge">
-            {post.data.subreddit_name_prefixed}
-          </div>
+          <div className="category-badge">{post.subreddit}</div>
         ) : (
           ""
         )}
 
         <div className="button-container">
-          {!savedPosts.find(
-            (savedPost) => savedPost.data.id === post.data.id
-          ) ? (
-            <button onClick={() => savePost(post.data.id, selectedCategory)}>
+          {!savedPosts.find((savedPost) => savedPost.id === post.id) ? (
+            <button onClick={() => savePost(post.id, selectedCategory)}>
               <span>
                 <i className="icon icon-save"></i>
               </span>
               <span> Save</span>
             </button>
           ) : (
-            <button onClick={() => unsavePost(post.data.id)}>
+            <button onClick={() => unsavePost(post.id)}>
               <span>
                 <i className="icon icon-saved"></i>
               </span>

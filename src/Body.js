@@ -22,7 +22,9 @@ const Body = ({
         <span> {viewSavedPosts ? "Go back" : "See all saved posts"}</span>
       </button>
       {postsToDisplay.map((post) => {
-        return <PostCard key={post.data.id} post={post} />;
+        return (
+          <PostCard key={viewSavedPosts ? post.id : post.data.id} post={post} />
+        );
       })}
     </div>
   );

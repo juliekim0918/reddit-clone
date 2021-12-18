@@ -3,15 +3,10 @@ import selectedCategory from "./selectedCategory";
 
 const initialState = [];
 
-const SAVE_POST = "SAVE_POST";
-const UNSAVE_POST = "UNSAVE_POST";
+const FETCH_SAVED_POSTS = "FETCH_SAVED_POSTS";
 
-const _savePost = (savedPost) => {
-  return { type: SAVE_POST, savedPost };
-};
-
-const _unsavePost = (id) => {
-  return { type: UNSAVE_POST, unsavedPost: id };
+const _fetchSavedPosts = (savedPosts) => {
+  return { type: FETCH_SAVED_POSTS, savedPosts };
 };
 
 export const savePost = (id, selectedCategory) => {
@@ -19,26 +14,32 @@ export const savePost = (id, selectedCategory) => {
     const allPosts = (await axios.get(`/api/${selectedCategory}`)).data.data
       .children;
     const savedPost = allPosts.find((post) => post.data.id === id);
-    dispatch(_savePost(savedPost));
+    await axios.post(`/api/${id}`, savedPost);
+    const savedPosts = (await axios.get("/api/saved-posts")).data;
+    dispatch(_fetchSavedPosts(savedPosts));
   };
 };
 
 export const unsavePost = (id) => {
   return async (dispatch) => {
-    dispatch(_unsavePost(id));
+    await axios.delete(`/api/${id}`);
+    const savedPosts = (await axios.get("/api/saved-posts")).data;
+    dispatch(_fetchSavedPosts(savedPosts));
+  };
+};
+
+export const fetchSavedPosts = () => {
+  return async (dispatch) => {
+    const savedPosts = (await axios.get("/api/saved-posts")).data;
+    dispatch(_fetchSavedPosts(savedPosts));
   };
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SAVE_POST:
-      const { savedPost } = action;
-      state = [...state, savedPost];
-      return state;
-    case UNSAVE_POST:
-      const { unsavedPost } = action;
-      state = [...state].filter((post) => post.data.id !== unsavedPost);
-      return state;
+    case FETCH_SAVED_POSTS:
+      const { savedPosts } = action;
+      return savedPosts;
     default:
       return state;
   }

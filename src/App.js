@@ -8,8 +8,9 @@ class App extends Component {
     super();
   }
   componentDidMount() {
-    const { selectedCategory, updatePosts } = this.props;
+    const { selectedCategory, updatePosts, fetchSavedPosts } = this.props;
     updatePosts(selectedCategory);
+    fetchSavedPosts();
     console.log("component did in fact mount!");
   }
 

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 // import { updatePosts } from "./store";
 import { changeSelectedCategory } from "./store/selectedCategory";
 import { updatePosts } from "./store/posts";
+import { fetchSavedPosts } from "./store/savedPosts";
 import axios from "axios";
 
 const Nav = (props) => {
@@ -49,6 +50,9 @@ export const mapDispatchToProps = (dispatch) => {
     },
     updatePosts: (category) => {
       dispatch(updatePosts(category));
+    },
+    fetchSavedPosts: () => {
+      dispatch(fetchSavedPosts());
     },
   };
 };
